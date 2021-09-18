@@ -53,6 +53,7 @@ let launchBrowser = true;
                 if (exitData.exitCode === 201) {
                     const getCurrentVersion = await getUpdate()
                     await applyUpdate(getCurrentVersion)
+                    continue
                 }
 
                 // If the process exited with a non-zero code and it isn't the restart signal
