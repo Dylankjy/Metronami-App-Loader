@@ -4,6 +4,8 @@
   "description": "Application loader and updater for Metronami",
   "main": "loader.js",
   "scripts": {
+    "prestart": "npm i",
+    "start": "node ./loader.js",
     "app-start": "cd metronami && npm start",
     "test": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
