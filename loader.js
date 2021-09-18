@@ -30,8 +30,6 @@ let launchBrowser = true;
     setTimeout(async () => {
         while (true) {
             try {
-                const { stdout } = await execa('npm run app-start', { stdio: 'inherit' })
-
                 if (launchBrowser === true) {
                     launchBrowser = false
                     setTimeout(() => {
@@ -43,6 +41,7 @@ let launchBrowser = true;
                         }, 5000)
                     }, 8000)
                 }
+                const { stdout } = await execa('npm run app-start', { stdio: 'inherit' })
             } catch (exitData) {
                 // Otherwise, restart the process
                 if (exitData.exitCode === 200) {
