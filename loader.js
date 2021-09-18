@@ -33,7 +33,7 @@ let launchBrowser = true;
                 if (launchBrowser === true) {
                     launchBrowser = false
                     setTimeout(() => {
-                        console.log(`${chalk.whiteBright('Launching Metronami in your browser...')}`)
+                        console.log(`${chalk.whiteBright('Launching Metronami in your browser... If the page does not load, give it awhile and refresh the page.')}`)
                         open(`http://localhost:36554`)
 
                         setTimeout(() => {
@@ -43,27 +43,24 @@ let launchBrowser = true;
                 }
                 const { stdout } = await execa('npm run app-start', { stdio: 'inherit' })
             } catch (exitData) {
-                // Otherwise, restart the process
+                if (exitData.exitCode === 0) {
+                    process.exit()
+                }
+
+                // 200 = Restart signal
                 if (exitData.exitCode === 200) {
                     console.log('[LOADER] Restart requested')
                     continue
                 }
 
-                // Update mode
+                // 201 - Update mode
                 if (exitData.exitCode === 201) {
                     const getCurrentVersion = await getUpdate()
                     await applyUpdate(getCurrentVersion)
                     continue
                 }
 
-                // If the process exited with a non-zero code and it isn't the restart signal
-                // then close the process and exit the loop
-                if (exitData.exitCode !== 0) {
-                    throw exitData
-                }
-
-                // Otherwise, close process
-                process.exit(0)
+                throw exitData
             }
         }
     }, 2000)
