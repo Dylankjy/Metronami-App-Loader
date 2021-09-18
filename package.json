@@ -4,7 +4,7 @@
   "description": "Application loader and updater for Metronami",
   "main": "loader.js",
   "scripts": {
-    "app-start": "cd metronami && npm install && npm start",
+    "app-start": "cd metronami && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
