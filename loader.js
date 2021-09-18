@@ -1,8 +1,10 @@
 const execa = require('execa')
 
 // Updater
-const chalk = require('chalk');
-const { getUpdate, applyUpdate } = require('./boot/updater');
+const chalk = require('chalk')
+const { getUpdate, applyUpdate } = require('./boot/updater')
+
+const open = require('open')
 
 let currentVersion
 try {
@@ -10,6 +12,8 @@ try {
 } catch (e) {
     currentVersion = '0.0.0'
 }
+
+let launchBrowser = true;
 
 (async () => {
     // For new installs
@@ -27,6 +31,18 @@ try {
         while (true) {
             try {
                 const { stdout } = await execa('npm run app-start', { stdio: 'inherit' })
+
+                if (launchBrowser === true) {
+                    launchBrowser = false
+                    setTimeout(() => {
+                        console.log(`${chalk.whiteBright('Launching Metronami in your browser...')}`)
+                        open(`http://localhost:36554`)
+
+                        setTimeout(() => {
+                            console.log(`${chalk.cyan('Nothing happened? ')}${chalk.whiteBright(`Type http://localhost:36554 in your web browser's address bar to access Metronami.`)}`)
+                        }, 5000)
+                    }, 8000)
+                }
             } catch (exitData) {
                 // Otherwise, restart the process
                 if (exitData.exitCode === 200) {

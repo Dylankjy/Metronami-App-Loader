@@ -14,8 +14,8 @@ const chalk = require('chalk')
 
 const fs = require('fs')
 
-const ncp = require('ncp').ncp;
- ncp.limit = 16;
+const ncp = require('ncp').ncp
+ncp.limit = 16
 
 const getUpdate = () => {
     return new Promise((resolve) => {
@@ -62,11 +62,11 @@ const applyUpdate = (tag) => {
                     })
                 }, 3000)
             })
-        });
+        })
     })
 }
 
 module.exports = {
     getUpdate,
-    applyUpdate
+    applyUpdate,
 }
