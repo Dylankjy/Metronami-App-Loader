@@ -1,10 +1,10 @@
 {
   "name": "metronami-loader",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Application loader and updater for Metronami",
   "main": "loader.js",
   "scripts": {
-    "prestart": "npm i",
+    "prestart": "npm update",
     "start": "node ./loader.js",
     "app-start": "cd metronami && npm start",
     "test": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -25,19 +25,13 @@
     "url": "https://github.com/hiyamashu/Metronami-Loader/issues"
   },
   "homepage": "https://github.com/hiyamashu/Metronami-Loader#readme",
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "download": "^8.0.0",
-    "execa": "^5.1.1",
-    "extract-zip": "^2.0.1",
-    "get-github-tag": "^1.1.0",
-    "ncp": "^2.0.0",
-    "open": "^8.2.1",
-    "semver": "^7.3.5"
-  },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "metronami-loader-core": "^1.1.0"
   }
 }
